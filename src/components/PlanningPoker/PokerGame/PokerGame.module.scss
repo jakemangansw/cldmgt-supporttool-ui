@@ -1,0 +1,63 @@
+.PokerGame {}
+
+.redText{
+    color: red;
+}
+
+// .gridContainer {  display: grid;
+//   grid-template-columns: 1fr 1fr 1fr 1fr 1.1fr 1fr 0.9fr 1fr;
+//   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+//   grid-auto-columns: 1fr;
+//   gap: 0px 0px;
+//   grid-auto-flow: row;
+//   grid-template-areas:
+//     "users users cards cards cards cards start-new-game start-new-game"
+//     "users users cards cards cards cards result result"
+//     "users users cards cards cards cards result result"
+//     "users users cards cards cards cards result result"
+//     "users users cards cards cards cards result result"
+//     "users users cards cards cards cards result result";
+// }
+
+// .users { grid-area: users; }
+
+// .cards { grid-area: cards; }
+
+// .startNewGame { grid-area: start-new-game; }
+
+// .result { grid-area: result; }
+
+
+.gridContainer {
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1.1fr 0.9fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "users users cards cards cards result result result"
+    "users users cards cards cards result result result"
+    "users users cards cards cards result result result"
+    "users users cards cards cards result result result"
+    "users users cards cards cards result result result"
+    "users users cards cards cards startNewGame startNewGame startNewGame"; 
+}
+.users { grid-area: users; }
+.cards { grid-area: cards; }
+.result { grid-area: result; }
+.startNewGame { grid-area: startNewGame; }
+
+
+.fade-out {
+  animation: fade-out 1s ease-out;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

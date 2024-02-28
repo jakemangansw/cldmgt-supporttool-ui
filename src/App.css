@@ -1,0 +1,7 @@
+body {
+    background-color: rgb(250, 250, 250) !important;
+}
+
+body #g_a11y_announcement{
+    display: none;
+}
