@@ -16,6 +16,7 @@ import SupportApp from './components/SupportApp/SupportApp';
 import ProtectedLoginRoute from './components/Auth/ProtectedLoginRoute/ProtectedLoginRoute';
 import SupportAppOnboarding from './components/SupportApp/SupportAppOnboarding/SupportAppOnboarding';
 import ProtectedApprovedRoleRoute from './components/Auth/ProtectedApprovedRoleRoute/ProtectedApprovedRoleRoute';
+import UserManagementRoute from './components/Navigation/Routes/UserManagementRoute/UserManagementRoute';
 
 const queryClient = new QueryClient()
 
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
                 children: [
                   {
                     path: "user-management",
-                    element: <Box>User management</Box>
+                    element: <UserManagementRoute/>
                   }
                 ]
               },

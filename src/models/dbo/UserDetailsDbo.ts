@@ -1,7 +1,9 @@
-export interface UserDetailsDbo {
+export interface SupportUser {
+    id: string,
     email: string;
-    familyName: string;
-    givenName: string;
-    role: string;
+    firstName: string;
+    lastName: string;
     subjectId: string;
+    authorisationRole: number;
+    isApproved: boolean;
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import { UserDetailsDbo } from "../models/dbo/UserDetailsDbo";
+// import React from "react";
+// import { SupportUser } from "../models/dbo/UserDetailsDbo";
 
-const AuthContext = React.createContext<UserDetailsDbo | null>(null);
+// const AuthContext = React.createContext<SupportUser | null>(null);
 
-export default AuthContext
+// export default AuthContext
