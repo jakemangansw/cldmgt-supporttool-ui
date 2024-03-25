@@ -1,6 +1,6 @@
 import axios from "axios";
 import { UserRoleResponse } from "../models/response/UserRoleResponse";
-import { SupportUser } from "../models/dbo/UserDetailsDbo";
+import { SupportUser } from "../models/dbo/SupportUser";
 
 export const getUserRole = async (): Promise<UserRoleResponse> => {
     let token = localStorage.getItem("accessToken");

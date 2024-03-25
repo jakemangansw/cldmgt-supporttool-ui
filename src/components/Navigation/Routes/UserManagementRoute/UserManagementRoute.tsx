@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
-import styles from './UserManagementRoute.module.scss';
+import { FC } from 'react';
 import { useQuery } from 'react-query';
-import { SupportUser } from '../../../../models/dbo/UserDetailsDbo';
+import { SupportUser } from '../../../../models/dbo/SupportUser';
 import { getAllSupportUsers } from '../../../../services/user.service';
-import { Box, Button, Card, Center, HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tooltip, Tr, VStack } from '@chakra-ui/react';
+import { Box, Button, Card, Center, HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tooltip, Tr } from '@chakra-ui/react';
 import { FaCheckCircle, FaUserPlus, FaCheck } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 

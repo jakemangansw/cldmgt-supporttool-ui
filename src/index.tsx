@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import PokerGameRoute from './components/Navigation/Routes/PokerGameRoute/PokerGameRoute';
-import { Box, ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import AccountInformationRoute from './components/Navigation/Routes/AccountInformationRoute/AccountInformationRoute';
