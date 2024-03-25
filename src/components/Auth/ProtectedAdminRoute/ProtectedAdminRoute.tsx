@@ -8,7 +8,7 @@ interface ProtectedAdminRouteProps {}
 const ProtectedAdminRoute: FC<ProtectedAdminRouteProps> = () => {
   const roleContext = useContext(RoleContext);
 
-  return roleContext?.role === 1 ? <Outlet/> : <NoAccess/>
+  return roleContext?.role === 0 ? <Outlet/> : <NoAccess/>
 
 }
 

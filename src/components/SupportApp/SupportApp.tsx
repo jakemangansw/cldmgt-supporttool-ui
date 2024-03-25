@@ -13,6 +13,7 @@ const SupportApp: FC<SupportAppProps> = () => {
     const signOut = (): void => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('accessTokenDetails');
+    navigate("/login")
   }
 
   useEffect(() => {

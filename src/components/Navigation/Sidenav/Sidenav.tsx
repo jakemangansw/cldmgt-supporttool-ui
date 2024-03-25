@@ -20,11 +20,11 @@ const Sidenav: FC<SidenavProps> = () => {
       label: "User Management",
       path: "admin/user-management"
     },
-    {
-      icon: "FaUser",
-      label: "Account Information",
-      path: "account"
-    }
+    // {
+    //   icon: "FaUser",
+    //   label: "Account Information",
+    //   path: "account"
+    // }
   ]
 
   const [isWide, setIsWide] = useState<boolean>(false);
