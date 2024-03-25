@@ -1,26 +1,53 @@
 import { FC, useState } from 'react';
 import { Box, Button, Center, HStack, Select, Text, VStack, useToast } from '@chakra-ui/react';
-import { postNewUser } from '../../../services/user.service';
+import { getUserRole, postNewUser } from '../../../services/user.service';
 import { useQuery } from 'react-query';
+import { UserRoleResponse } from '../../../models/response/UserRoleResponse';
+import { useNavigate } from 'react-router-dom';
 
 interface SupportAppOnboardingProps { }
 
 const SupportAppOnboarding: FC<SupportAppOnboardingProps> = () => {
 
   const toast = useToast();
-  
+  const navigate = useNavigate();
+
   const [selectedRole, setSelectedRole] = useState<string>("");
 
   const handleChange = (e: any) => {
     setSelectedRole(e.target.value);
   }
 
-  const { refetch } = useQuery('getRole', async (): Promise<boolean> => {
+  const { refetch: refetchRequest } = useQuery('postNewUser', async (): Promise<boolean> => {
     return await postNewUser();
-  }, {enabled: false, retry: false, onSuccess: handleSuccess, onError: handleError})
+  }, { enabled: false, retry: false, onSuccess: handleSuccess, onError: handleError })
 
-  const onClickHandler = () => {
-    refetch();
+  const { refetch: refetchCheck } = useQuery('getRole', async (): Promise<UserRoleResponse> => {
+    return await getUserRole();
+  }, { enabled: false, retry: false, onSuccess: (data) => { getRoleIsSuccessHandler(data) } })
+
+  const getRoleIsSuccessHandler = (data: any) => {
+    console.log("onsuccess ran");
+    console.log("res:", data)
+    if (data?.isApproved && data.role <= 3) {
+      navigate("/app");
+    } else {
+      toast({
+        title: "No access",
+        description: "You do not yet have access.",
+        status: 'warning',
+        duration: 6000,
+        isClosable: true
+      })
+    }
+  }
+
+  const onClickHandlerRequestAccess = () => {
+    refetchRequest();
+  }
+
+  const onClickHandlerCheckAccess = () => {
+    refetchCheck();
   }
 
   function handleSuccess() {
@@ -56,8 +83,10 @@ const SupportAppOnboarding: FC<SupportAppOnboardingProps> = () => {
               <option value='support'>Support</option>
             </Select>
           </Box>
-          <Button bgColor="blue.400" color="white" isDisabled={selectedRole === ""} onClick={onClickHandler}>Request access</Button>
+          <Button bgColor="blue.400" color="white" isDisabled={selectedRole === ""} onClick={onClickHandlerRequestAccess}>Request access</Button>
         </HStack>
+        <Text mt="4" fontSize="12px">Click below to check access</Text>
+          <Button size="sm" bgColor="green.400" color="white" onClick={onClickHandlerCheckAccess}>Check access</Button>
       </VStack>
     </Center>
   </>
