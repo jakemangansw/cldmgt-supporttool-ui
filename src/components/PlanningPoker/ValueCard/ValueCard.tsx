@@ -14,22 +14,22 @@ const ValueCard: FC<ValueCardProps> = (props: ValueCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const selectedStyle = {
-    borderColor: props.selectedValue === props.value ? "#6685ff" : "#cfcfcf",
-    backgroundColor: props.selectedValue === props.value ? "#c2ceff" : "white",
+    borderColor: props.selectedValue === props.value ? "#005677" : "#cfcfcf",
+    backgroundColor: props.selectedValue === props.value ? "#8db7c7" : "white",
   }
 
   const hoveredStyle = {
-    borderColor: "#6685ff",
+    borderColor: "#003c5a",
     backgroundColor: "white",
   }
 
-  const smallNumericSelectedStyle = {
-    backgroundColor: props.selectedValue === props.value ? "#c2ceff" : "white",
-    color: props.selectedValue === props.value ? "white" : "#bababa",
-  }
+  // const smallNumericSelectedStyle = {
+  //   backgroundColor: props.selectedValue === props.value ? "#c2ceff" : "white",
+  //   color: props.selectedValue === props.value ? "white" : "#bababa",
+  // }
 
   const cardBackgroundSelectedStyle = {
-    backgroundColor: props.selectedValue === props.value ? "#6685ff" : "#f5f5f5",
+    backgroundColor: props.selectedValue === props.value ? "#005677" : "#f5f5f5",
   }
 
   const cardTextSelectedStyle = {
@@ -45,8 +45,8 @@ const ValueCard: FC<ValueCardProps> = (props: ValueCardProps) => {
           border="4px"
           bg="white"
           borderRadius="5px"
-          height="32"
-          width="20"
+          height="24"
+          width="16"
           _hover={{ borderColor: "#6685ff", cursor: "pointer" }}
           onClick={() => props.selectValueFn(props.value)}
           onMouseEnter={() => setIsHovered(true)}
@@ -55,9 +55,9 @@ const ValueCard: FC<ValueCardProps> = (props: ValueCardProps) => {
           {/* <Text fontSize="25px" fontWeight="500" color="#5e5e5e" borderRadius="6px">{props.value}</Text> */}
           <Center h="75%" w="75%" borderRadius="5px" style={cardBackgroundSelectedStyle}>
             <VStack h="full" w="full" justifyContent="space-between" position="relative" top="-8px">
-              <Center style={smallNumericSelectedStyle} fontWeight="500" w="26px" h="26px" borderRadius="20px" position="relative" top="-3px" left="-22px">{props.value}</Center>
-              <Text style={cardTextSelectedStyle} fontSize="32px" fontWeight="500">{props.value}</Text>
-              <Center style={smallNumericSelectedStyle} fontWeight="500" color="#bababa" w="26px" h="26px" borderRadius="20px" position="relative" top="0px" left="22px" transform="rotate(0.5turn); translateX(10px)">{props.value}</Center>
+              {/* <Center style={smallNumericSelectedStyle} fontWeight="500" w="18px" h="18px" borderRadius="20px" position="relative" top="0px" left="-18px">{props.value}</Center> */}
+              <Text style={cardTextSelectedStyle} fontSize="28px" fontWeight="500" position="relative" top="18px">{props.value}</Text>
+              {/* <Center style={smallNumericSelectedStyle} fontWeight="500" color="#bababa" w="18px" h="18px" borderRadius="20px" position="relative" top="-12px" left="18px" transform="rotate(0.5turn); translateX(10px)">{props.value}</Center> */}
             </VStack>
           </Center>
 

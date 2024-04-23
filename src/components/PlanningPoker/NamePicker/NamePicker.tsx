@@ -1,9 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './NamePicker.module.scss';
-import { Button, Center, HStack, Input, StatHelpText, VStack } from '@chakra-ui/react';
+import { Button, Center, HStack, Input, VStack } from '@chakra-ui/react';
 import * as uuid from "uuid"
-import { create } from "zustand"
-import useActivePokerGameStore from '../../../stores/activePokerGameStore';
+// import useActivePokerGameStore from '../../../stores/activePokerGameStore';
 
 interface NamePickerProps {
   setSelf: Function
@@ -13,7 +12,19 @@ const NamePicker: FC<NamePickerProps> = (props: NamePickerProps) => {
 
   const [nameValue, setNameValue] = useState<string>("")
   const [roomcodeValue, setRoomcodeValue] = useState<string>("")
-  const {activePokerGame, setActivePokerGame} = useActivePokerGameStore();
+  // const [accessTokenFullName, setAccessTokenFullName] = useState<string>("");
+  // const {activePokerGame, setActivePokerGame} = useActivePokerGameStore();
+
+  useEffect(() => getUserDetails())
+
+  const getUserDetails = () => {
+    const tokenDetails = localStorage.getItem('accessTokenDetails')
+    if (tokenDetails) {
+      const tokenDetailsObj = JSON.parse(tokenDetails);
+      setNameValue(tokenDetailsObj.given_name + " " + tokenDetailsObj.family_name);
+      
+    }
+  }
 
   const initSelf = () => {
     const self = ({
@@ -22,7 +33,7 @@ const NamePicker: FC<NamePickerProps> = (props: NamePickerProps) => {
       roomcode: roomcodeValue,
       valueSelected: null
     })
-    setActivePokerGame();
+    // setActivePokerGame();
     props.setSelf(self)
   }
 

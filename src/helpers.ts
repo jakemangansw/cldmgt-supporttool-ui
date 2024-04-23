@@ -31,3 +31,12 @@ export const getColorByValue = (value: number) => {
   const index = Math.floor((value / 100) * colors.length-1);
   return colors[index] ?? "ff0000";
 }
+
+export const getWidthByValue = (value: number) => {
+  // Ensure the value is within the range of 0-100
+  value = Math.min(Math.max(value, 0), 100);
+
+  // Calculate the index based on the value
+  const index = Math.floor((value / 100) * 10-1);
+  return index*10;
+}

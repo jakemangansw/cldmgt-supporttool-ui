@@ -11,7 +11,6 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
   const [iconInitials, setIconInitials] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [userFullname, setUserFullname] = useState<string>("");
-  const [userGivenName, setUserGivenName] = useState<string>("");
 
   useEffect(() => getIconDetails())
 
@@ -23,7 +22,6 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
       setIconInitials(initials);
       setUserEmail(tokenDetailsObj.email);
       setUserFullname(tokenDetailsObj.given_name + " " + tokenDetailsObj.family_name);
-      setUserGivenName(tokenDetailsObj.given_name);
     }
   }
 
@@ -58,7 +56,7 @@ const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
       </Flex>
     </Flex>
     <Flex w="50%" h="full" justifyContent="center" alignItems="center">
-      <Text color="white" fontSize="18" fontWeight="500">Welcome back, {userGivenName}!</Text>
+      {/* <Text color="white" fontSize="18" fontWeight="500">Welcome back, {userGivenName}!</Text> */}
     </Flex>
     <Flex w="25%" h="full" justifyContent="flex-end">
       <Flex h="full" alignItems="center">
