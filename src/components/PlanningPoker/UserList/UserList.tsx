@@ -18,7 +18,7 @@ const UserList: FC<UserListProps> = (props: UserListProps) => (
     {props.users.length && props.users.map((user) => {
         return <>
         <Box w="full" h="full" maxHeight="80px">
-          <UserCard userId={user.id} name={user.username} valueSelected={user.valueSelected} shouldReveal={props.shouldReveal} selfId={props.selfId} onOpenModalFunction={props.onOpenModalFunction}></UserCard>
+          <UserCard key={user.id} userId={user.id} name={user.username} valueSelected={user.valueSelected} shouldReveal={props.shouldReveal} selfId={props.selfId} onOpenModalFunction={props.onOpenModalFunction}></UserCard>
         </Box>
         </>
       })}

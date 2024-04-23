@@ -4,7 +4,7 @@ import camelcaseKeys from 'camelcase-keys';
 import { emit, getColorByValue } from '../../../helpers';
 import { SocketEvent } from '../../../models/SocketEvent';
 import { User } from '../../../models/User';
-import { Text, Box, Button, Center, Grid, GridItem, CircularProgress, CircularProgressLabel, useDisclosure } from '@chakra-ui/react';
+import { Text, Box, Button, Center, Grid, GridItem, CircularProgress, CircularProgressLabel, useDisclosure, VStack } from '@chakra-ui/react';
 import ValueCardList from '../ValueCardList/ValueCardList';
 import { RoomState } from '../../../models/GameState';
 import UserList from '../UserList/UserList';
@@ -34,7 +34,7 @@ const PokerGame: FC<PokerGameProps> = (props: PokerGameProps) => {
   //"ws://localhost:8080/ws?user_id="
 
   useEffect(() => {
-    let ws = new WebSocket(import.meta.env.VITE_POKER_API_URL_WS + "/ws?user_id=" + props.self.id);
+    let ws = new WebSocket(import.meta.env.VITE_POKER_API_URL_WS + "/ws?user_id=" + props.self.id + "&roomcode=" + props.self.roomcode);
     setWs(ws)
 
     ws.onopen = () => {
@@ -123,7 +123,12 @@ const PokerGame: FC<PokerGameProps> = (props: PokerGameProps) => {
 
   return (
     <>
-      <Center maxWidth="1250px" height="100%" width={["90%", "90%", "90%", "90%", "90%", "60%", "40%"]} borderRadius="5" padding="4">
+      <VStack w="full" h="full">
+        <Center h="10%" w="full">
+          <Text fontWeight="500" >You are currently in room - {props.self.roomcode}</Text>
+        </Center>
+        <Box h="90%" w="full">
+        <Center width="full" height="100%"  borderRadius="5" padding="4">
         <Grid h={["400px", "600px"]} w="full" className={styles.gridContainer}>
           <GridItem className={styles.users}>
             <UserList users={users} shouldReveal={reveal} selfId={props.self.id} onOpenModalFunction={onOpen}></UserList>
@@ -165,6 +170,8 @@ const PokerGame: FC<PokerGameProps> = (props: PokerGameProps) => {
           </GridItem>
         </Grid>
       </Center>
+        </Box>
+      </VStack>
 
       <EditUsernameModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} editUsername={editUsername}></EditUsernameModal>
     </>

@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 // REACT_APP_API_URL_HTTPS="http://localhost:8080"
 // REACT_APP_API_URL_WS="ws://localhost:8080"
 
+// VITE_API_URL_HTTPS="http://localhost:8080"
+// VITE_POKER_API_URL_WS="ws://localhost:8081"
+
 
 function App() {
   const navigate = useNavigate();

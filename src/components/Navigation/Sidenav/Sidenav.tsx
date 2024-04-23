@@ -5,6 +5,7 @@ import { SidebarItem } from '../../../models/SidebarItem';
 import { FaQuestion, FaRocket, FaUser, FaUserEdit } from "react-icons/fa"
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
 import { useNavigate } from 'react-router-dom';
+import useActivePokerGameStore from '../../../stores/activePokerGameStore';
 
 interface SidenavProps { }
 
@@ -29,6 +30,7 @@ const Sidenav: FC<SidenavProps> = () => {
 
   const [isWide, setIsWide] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const {activePokerGame} = useActivePokerGameStore();
   const navigate = useNavigate();
 
   const expandHandler = () => {
@@ -36,6 +38,10 @@ const Sidenav: FC<SidenavProps> = () => {
   }
 
   const handleItemClick = (index: number, path: string) => {
+    if(activePokerGame && !path.includes("poker")){
+      console.log("Active poker game");
+    }
+    
     setActiveIndex(index);
     navigate(path);
   };
