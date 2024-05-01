@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './IFrameTestRoute.module.scss';
 import { VStack } from '@chakra-ui/react';
 
