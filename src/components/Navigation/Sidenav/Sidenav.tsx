@@ -21,6 +21,11 @@ const Sidenav: FC<SidenavProps> = () => {
       label: "User Management",
       path: "admin/user-management"
     },
+    {
+      icon: "FaUserEdit",
+      label: "IFrames",
+      path: "iframe-test"
+    }
     // {
     //   icon: "FaUser",
     //   label: "Account Information",

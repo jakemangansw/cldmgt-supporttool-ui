@@ -17,6 +17,7 @@ import ProtectedLoginRoute from './components/Auth/ProtectedLoginRoute/Protected
 import SupportAppOnboarding from './components/SupportApp/SupportAppOnboarding/SupportAppOnboarding';
 import ProtectedApprovedRoleRoute from './components/Auth/ProtectedApprovedRoleRoute/ProtectedApprovedRoleRoute';
 import UserManagementRoute from './components/Navigation/Routes/UserManagementRoute/UserManagementRoute';
+import IFrameTestRoute from './components/Navigation/Routes/IFrameTest/IFrameTestRoute';
 
 const queryClient = new QueryClient()
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
               {
                 path: 'poker',
                 element: <PokerGameRoute />
+              },
+              {
+                path: 'iframe-test',
+                element: <IFrameTestRoute/>
               },
               {
                 path: 'admin',
