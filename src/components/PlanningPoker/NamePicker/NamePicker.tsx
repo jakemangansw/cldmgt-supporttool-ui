@@ -48,7 +48,7 @@ const NamePicker: FC<NamePickerProps> = (props: NamePickerProps) => {
         </HStack>
         <HStack>
           <p>Room: </p>
-          <Input value={roomcodeValue} onInput={e => setRoomcodeValue(e.currentTarget.value)}></Input>
+          <Input value={roomcodeValue} onInput={e => setRoomcodeValue(e.currentTarget.value.toLowerCase())}></Input>
         </HStack>
         
         <Button onClick={() => initSelf()} isDisabled={nameValue === "" || roomcodeValue === ""}>Go</Button>
