@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './unprotected-iframe-portal.module.scss';
 
-interface UnprotectedIframePortalProps {}
+interface UnprotectedIframePortalProps { }
 
 const UnprotectedIframePortal: FC<UnprotectedIframePortalProps> = () => (
   <div className={styles.UnprotectedIframePortal}>

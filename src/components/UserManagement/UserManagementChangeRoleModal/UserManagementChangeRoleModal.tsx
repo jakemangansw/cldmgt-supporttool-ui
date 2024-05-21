@@ -1,6 +1,5 @@
-import React, { FC, useState } from 'react';
-import styles from './UserManagementChangeRoleModal.module.scss';
-import { Button, Flex, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select } from '@chakra-ui/react';
+import { Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select } from '@chakra-ui/react';
+import { FC, useState } from 'react';
 
 interface UserManagementChangeRoleModalProps {
   isOpen: boolean;

@@ -1,13 +1,12 @@
-import { FC, useState } from 'react';
-import styles from './Sidenav.module.scss';
 import { Box, Center, Flex, List, ListItem } from '@chakra-ui/react';
-import { SidebarItem } from '../../../models/SidebarItem';
-import { FaQuestion, FaRocket, FaUser, FaUserEdit } from "react-icons/fa"
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
-import { useNavigate } from 'react-router-dom';
-import useActivePokerGameStore from '../../../stores/activePokerGameStore';
-import { GrTest } from "react-icons/gr";
+import { FC, useState } from 'react';
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { FaQuestion, FaRocket, FaUser, FaUserEdit } from "react-icons/fa";
 import { RiTestTubeFill } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
+import { SidebarItem } from '../../../models/SidebarItem';
+import useActivePokerGameStore from '../../../stores/activePokerGameStore';
+import styles from './Sidenav.module.scss';
 
 interface SidenavProps { }
 

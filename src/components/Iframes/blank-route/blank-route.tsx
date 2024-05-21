@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './blank-route.module.scss';
 
-interface BlankRouteProps {}
+interface BlankRouteProps { }
 
 const BlankRoute: FC<BlankRouteProps> = () => (
   <div className={styles.BlankRoute}>

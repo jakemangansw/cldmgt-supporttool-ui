@@ -1,6 +1,5 @@
-import React, { FC, useState } from 'react';
-import styles from './VideoIdTestPageRoute.module.scss';
-import { Box, Button, Center, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Text, VStack } from '@chakra-ui/react';
+import { FC, useState } from 'react';
 
 interface VideoIdTestPageRouteProps { }
 
@@ -20,16 +19,16 @@ const VideoIdTestPageRoute: FC<VideoIdTestPageRouteProps> = () => {
     if (levels === 0) {
       return;
     }
-  
+
     const newIframe = document.createElement('iframe');
     newIframe.src = 'about:blank'; // Adjust src if needed for specific testing
     newIframe.height = "600px";
     newIframe.width = "100%";
 
-    if(levels === 1){
+    if (levels === 1) {
       newIframe.src = "https://www.youtube.com/embed/RSuLFvalhnQ?si=ec8SAV2uCWnPW3N4"
     }
-  
+
     iframe.contentDocument.body.appendChild(newIframe);
     nestIframes(newIframe, levels - 1);
   }

@@ -1,10 +1,10 @@
+import { Badge, Box, Button, Card, Center, HStack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tooltip, Tr, VStack, useDisclosure, useToast } from '@chakra-ui/react';
 import { FC, useState } from 'react';
-import { UseMutationResult, useMutation, useQuery } from 'react-query';
+import { FaCheck, FaCheckCircle, FaUserPlus } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
+import { useMutation, useQuery } from 'react-query';
 import { SupportUser } from '../../../../models/dbo/SupportUser';
 import { getAllSupportUsers, postApproveUser, putUpdateRole } from '../../../../services/user.service';
-import { Badge, Box, Button, Card, Center, HStack, Table, Text, TableContainer, Tbody, Td, Th, Thead, Toast, ToastProvider, Tooltip, Tr, useDisclosure, useToast, VStack } from '@chakra-ui/react';
-import { FaCheckCircle, FaUserPlus, FaCheck } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
 import UserManagementChangeRoleModal from '../../../UserManagement/UserManagementChangeRoleModal/UserManagementChangeRoleModal';
 
 
