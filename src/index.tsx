@@ -18,6 +18,9 @@ import SupportAppOnboarding from './components/SupportApp/SupportAppOnboarding/S
 import ProtectedApprovedRoleRoute from './components/Auth/ProtectedApprovedRoleRoute/ProtectedApprovedRoleRoute';
 import UserManagementRoute from './components/Navigation/Routes/UserManagementRoute/UserManagementRoute';
 import IFrameTestRoute from './components/Navigation/Routes/IFrameTest/IFrameTestRoute';
+import VideoIdTestPageRoute from './components/Navigation/Routes/VideoIdTestPageRoute/VideoIdTestPageRoute';
+import UnprotectedIframe from './components/Iframes/unprotected-iframe/unprotected-iframe';
+import BlankRoute from './components/Iframes/blank-route/blank-route';
 
 const queryClient = new QueryClient()
 
@@ -29,6 +32,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/unprotected-iframe",
+    element: <UnprotectedIframe />
+  },
+  {
+    path: "/blank-route",
+    element: <BlankRoute/>
   },
   {
     path: "/app",
@@ -48,7 +59,11 @@ const router = createBrowserRouter([
               },
               {
                 path: 'iframe-test',
-                element: <IFrameTestRoute/>
+                element: <IFrameTestRoute />
+              },
+              {
+                path: 'video-id-test',
+                element: <VideoIdTestPageRoute />
               },
               {
                 path: 'admin',
@@ -56,7 +71,7 @@ const router = createBrowserRouter([
                 children: [
                   {
                     path: "user-management",
-                    element: <UserManagementRoute/>
+                    element: <UserManagementRoute />
                   }
                 ]
               },

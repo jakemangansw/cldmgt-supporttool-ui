@@ -6,6 +6,8 @@ import { FaQuestion, FaRocket, FaUser, FaUserEdit } from "react-icons/fa"
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
 import { useNavigate } from 'react-router-dom';
 import useActivePokerGameStore from '../../../stores/activePokerGameStore';
+import { GrTest } from "react-icons/gr";
+import { RiTestTubeFill } from "react-icons/ri";
 
 interface SidenavProps { }
 
@@ -22,9 +24,14 @@ const Sidenav: FC<SidenavProps> = () => {
       path: "admin/user-management"
     },
     {
-      icon: "FaUserEdit",
+      icon: "RiTestTubeFill",
       label: "IFrames",
       path: "iframe-test"
+    },
+    {
+      icon: "RiTestTubeFill",
+      label: "Video ID Test Page",
+      path: "video-id-test"
     }
     // {
     //   icon: "FaUser",
@@ -35,7 +42,7 @@ const Sidenav: FC<SidenavProps> = () => {
 
   const [isWide, setIsWide] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const {activePokerGame} = useActivePokerGameStore();
+  const { activePokerGame } = useActivePokerGameStore();
   const navigate = useNavigate();
 
   const expandHandler = () => {
@@ -43,10 +50,10 @@ const Sidenav: FC<SidenavProps> = () => {
   }
 
   const handleItemClick = (index: number, path: string) => {
-    if(activePokerGame && !path.includes("poker")){
+    if (activePokerGame && !path.includes("poker")) {
       console.log("Active poker game");
     }
-    
+
     setActiveIndex(index);
     navigate(path);
   };
@@ -55,10 +62,12 @@ const Sidenav: FC<SidenavProps> = () => {
     switch (iconName) {
       case "CgCardHearts":
         return <FaRocket size="20"></FaRocket>
-        case "FaUser":
+      case "FaUser":
         return <FaUser size="20"></FaUser>
-        case "FaUserEdit":
-          return <FaUserEdit size="20"></FaUserEdit>
+      case "FaUserEdit":
+        return <FaUserEdit size="20"></FaUserEdit>
+      case "RiTestTubeFill":
+        return <RiTestTubeFill size="24"></RiTestTubeFill>
       default:
         return <FaQuestion size="20"></FaQuestion>
     }

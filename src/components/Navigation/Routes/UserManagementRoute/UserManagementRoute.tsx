@@ -1,42 +1,106 @@
-import { FC } from 'react';
-import { useQuery } from 'react-query';
+import { FC, useState } from 'react';
+import { UseMutationResult, useMutation, useQuery } from 'react-query';
 import { SupportUser } from '../../../../models/dbo/SupportUser';
-import { getAllSupportUsers } from '../../../../services/user.service';
-import { Box, Button, Card, Center, HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tooltip, Tr } from '@chakra-ui/react';
+import { getAllSupportUsers, postApproveUser, putUpdateRole } from '../../../../services/user.service';
+import { Badge, Box, Button, Card, Center, HStack, Table, Text, TableContainer, Tbody, Td, Th, Thead, Toast, ToastProvider, Tooltip, Tr, useDisclosure, useToast, VStack } from '@chakra-ui/react';
 import { FaCheckCircle, FaUserPlus, FaCheck } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import UserManagementChangeRoleModal from '../../../UserManagement/UserManagementChangeRoleModal/UserManagementChangeRoleModal';
 
 
 interface UserManagementRouteProps { }
 
 const UserManagementRoute: FC<UserManagementRouteProps> = () => {
 
-  const { data, isLoading } = useQuery('getAllSupportUsers', async (): Promise<SupportUser[]> => {
+  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [userToUpdate, setUserToUpdate] = useState<string>("");
+
+  const { data: getAllSupportAppUserData, isLoading: getAllSupportAppUsersIsLoading, refetch: getAllRefetch } = useQuery('getAllSupportUsers', async (): Promise<SupportUser[]> => {
     return await getAllSupportUsers()
+  })
+
+  // const { refetch: postApproveRefetch } = useQuery('postApproveUser', async (): Promise<void> => {
+
+  //   return await postApproveUser(email);
+  // }, {
+  //   enabled: false,
+  //   retry: false,
+  //   onSuccess: onPostSuccess
+  // })
+
+  const mutate = useMutation({
+    mutationFn: async (email: string) => {
+      return await postApproveUser(email)
+    },
+    onSuccess: async (_data, email) => {
+      toast({
+        title: email + " has been approved",
+        status: "success",
+        duration: 6000,
+        isClosable: true
+      })
+      await getAllRefetch()
+    },
+    onMutate: (email: string) => {
+      console.log("Approving " + email);
+    }
+  })
+
+  const mutateUpdateRole = useMutation({
+    mutationFn: async (params: {
+      email: string,
+      roleAsString: string
+    }) => {
+      return await putUpdateRole({
+        email: params.email,
+        roleAsString: params.roleAsString
+      })
+    },
+    onSuccess: async (_data, variables) => {
+      toast({
+        title: variables.email + " role changed to " + getAuthRoleString(parseInt(variables.roleAsString)),
+        status: "success",
+        duration: 6000,
+        isClosable: true
+      })
+      await getAllRefetch()
+    }
   })
 
   const getAuthRoleString = (value: number) => {
     switch (value) {
       case 0:
-        return "Admin"
+        return "CLDMGT Team member (Admin)"
       case 1:
-        return "CLDMGT Team member"
+        return "3rd Line Support"
       case 2:
-        return "3L support"
-      case 3:
         return "Support"
+      case 3:
+        return "Awaiting Role"
       case 4:
         return "Unassigned"
     }
   }
 
+  const openUpdateRoleModal = (email: string) => {
+    setUserToUpdate(email);
+    onOpen()
+  }
+
+
   return <>
-    {isLoading ?
+    {getAllSupportAppUsersIsLoading ?
       <Box>Loading...</Box> :
-      <Center w="full">
-        <Card>
-          <TableContainer>
-            <Table size="lg">
+      <VStack padding="8" w="full" display="flex" justifyContent="center" flexDirection="column">
+        <HStack>
+          <Badge colorScheme="red">Awaiting role</Badge>
+          <Badge colorScheme="red">Unassigned</Badge>
+          <Text fontSize="12px" fontWeight="500">Users with a role of "Awaiting role" or "Unassigned" will be unable to access the app, please set their role.</Text>
+        </HStack>
+        <Card w="75%" mt="4">
+          <TableContainer overflowY={'auto'}>
+            <Table size="sm">
               <Thead>
                 <Tr>
                   <Th><Center>Name</Center></Th>
@@ -47,15 +111,15 @@ const UserManagementRoute: FC<UserManagementRouteProps> = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {data?.map(user => {
+                {getAllSupportAppUserData?.map(user => {
                   return <Tr>
                     <Td><Center>{user.firstName + " " + user.lastName}</Center></Td>
                     <Td><Center>{user.email}</Center></Td>
                     <Td><Center>{getAuthRoleString(user.authorisationRole)}</Center></Td>
                     <Td><Center w="full">{user.isApproved ? <FaCheckCircle color="#3ace3a" size="25" /> : <MdCancel color="#FF6961" size="30" />}</Center></Td>
-                    <Td><HStack w="full">
-                      <Tooltip label="Approve"><Button><FaCheck /></Button></Tooltip>
-                      <Tooltip label="Change role"><Button><FaUserPlus /></Button></Tooltip>
+                    <Td><HStack w="full" justifyContent="center">
+                      <Tooltip label="Approve"><Button onClick={() => mutate.mutate(user.email)}><FaCheck /></Button></Tooltip>
+                      <Tooltip label="Change role"><Button onClick={() => openUpdateRoleModal(user.email)}><FaUserPlus /></Button></Tooltip>
                     </HStack></Td>
                   </Tr>
                 })}
@@ -63,7 +127,8 @@ const UserManagementRoute: FC<UserManagementRouteProps> = () => {
             </Table>
           </TableContainer>
         </Card>
-      </Center>
+        <UserManagementChangeRoleModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} userToUpdate={userToUpdate} updateRole={mutateUpdateRole.mutate} />
+      </VStack>
     }
   </>
 };

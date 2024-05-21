@@ -37,3 +37,30 @@ export const getAllSupportUsers = async (): Promise<SupportUser[]> => {
     })
     return res.data;
 }
+
+export const postApproveUser = async (email: string): Promise<void> => {
+    let token = localStorage.getItem("accessToken");
+    let url = import.meta.env.VITE_API_URL_HTTPS + "/api/users/approve/" + email;
+
+    let res = await axios.post(url, null, {
+        headers: {
+            "Authorization": "Bearer " + token,
+        },
+    })
+    return res.data;
+}
+
+export const putUpdateRole = async (params: { email: string, roleAsString: string }): Promise<void> => {
+    let token = localStorage.getItem("accessToken");
+    let url = import.meta.env.VITE_API_URL_HTTPS + "/api/users/" + params.email + "/role";
+
+    let res = await axios.put(url, null, {
+        params: {
+            role: params.roleAsString
+        },
+        headers: {
+            "Authorization": "Bearer " + token,
+        },
+    })
+    return res.data;
+}

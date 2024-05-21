@@ -15,14 +15,14 @@ const NamePicker: FC<NamePickerProps> = (props: NamePickerProps) => {
   // const [accessTokenFullName, setAccessTokenFullName] = useState<string>("");
   // const {activePokerGame, setActivePokerGame} = useActivePokerGameStore();
 
-  useEffect(() => getUserDetails())
+  useEffect(() => getUserDetails(), [])
 
   const getUserDetails = () => {
     const tokenDetails = localStorage.getItem('accessTokenDetails')
     if (tokenDetails) {
       const tokenDetailsObj = JSON.parse(tokenDetails);
       setNameValue(tokenDetailsObj.given_name + " " + tokenDetailsObj.family_name);
-      
+
     }
   }
 
@@ -39,24 +39,24 @@ const NamePicker: FC<NamePickerProps> = (props: NamePickerProps) => {
 
   return (
     <div className={styles.NamePicker}>
-    <Center>
-      <VStack>
-        <p>Enter details</p>
-        <HStack>
-          <p>Name: </p>
-          <Input value={nameValue} onInput={e => setNameValue(e.currentTarget.value)}></Input>
-        </HStack>
-        <HStack>
-          <p>Room: </p>
-          <Input value={roomcodeValue} onInput={e => setRoomcodeValue(e.currentTarget.value.toLowerCase())}></Input>
-        </HStack>
-        
-        <Button onClick={() => initSelf()} isDisabled={nameValue === "" || roomcodeValue === ""}>Go</Button>
-      </VStack>
-    </Center>
+      <Center>
+        <VStack>
+          <p>Enter details</p>
+          <HStack>
+            <p>Name: </p>
+            <Input value={nameValue} onInput={e => setNameValue(e.currentTarget.value)}></Input>
+          </HStack>
+          <HStack>
+            <p>Room: </p>
+            <Input value={roomcodeValue} onInput={e => setRoomcodeValue(e.currentTarget.value.toLowerCase())}></Input>
+          </HStack>
+
+          <Button onClick={() => initSelf()} isDisabled={nameValue === "" || roomcodeValue === ""}>Go</Button>
+        </VStack>
+      </Center>
     </div>
   )
-  
+
 };
 
 export default NamePicker;

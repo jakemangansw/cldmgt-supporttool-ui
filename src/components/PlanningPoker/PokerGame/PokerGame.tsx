@@ -35,6 +35,7 @@ const PokerGame: FC<PokerGameProps> = (props: PokerGameProps) => {
   const [isExploding, setIsExploding] = useState(false);
   const [isNudgeBox, setNudgeBox] = useState(false);
   const [isShakeBox, setShakeBox] = useState(false);
+  const [nearestHigherFib, setNearestHigherFib] = useState(0);
 
   //"wss://planningpoker-server-dot-smoothwall-sandbox.nw.r.appspot.com/ws?user_id="
   //"ws://localhost:8080/ws?user_id="
@@ -88,6 +89,7 @@ const PokerGame: FC<PokerGameProps> = (props: PokerGameProps) => {
   const startRevealSequence = (decidedValue: number, displayConfetti: boolean) => {
     // let i = 3;
     setShakeBox(true);
+    setNearestHigherFib(findNearestHigherFib(decidedValue));
     interval(1000).pipe(take(3))
       .subscribe(() => {
         // setDecidedValue(i);
@@ -104,6 +106,17 @@ const PokerGame: FC<PokerGameProps> = (props: PokerGameProps) => {
   const nudgeBox = () => {
     setNudgeBox(true);
     setTimeout(() => setNudgeBox(false), 500);
+  }
+
+  const findNearestHigherFib = (n: number) => {
+    let a = 0;
+    let b = 1;
+    while (b < n) {
+      const temp = a;
+      a = b;
+      b = temp + b;
+    }
+    return b;
   }
 
 
@@ -155,25 +168,25 @@ const PokerGame: FC<PokerGameProps> = (props: PokerGameProps) => {
                   <Button bgColor="#d3d6db" w="25%"><BiSolidDoorOpen size="25"></BiSolidDoorOpen></Button>
                 </Flex>
                 <Button bgColor="#d3d6db"><Text color="#4d4d4d" mr="2" fontSize="12px">Room</Text><Text color="#4d4d4d" fontSize="20px" fontWeight="500">{props.self.roomcode}</Text></Button>
-
               </VStack>
-
-
             </HStack>
-
           </HStack>
-
         </Flex>
         <Box w="full" h="55%">
           <Center w="full" h="full" flexDir={"column"}>
-            {decidedValue === -1 ? <SlPresent size="150" color="#b3b3b3" className={`${isNudgeBox ? styles.nudgeBox : ''} ${isShakeBox ? styles.shakeBox : ''}`}></SlPresent> : <Text position="relative" top="1px" fontSize="100px" fontWeight="500" color={reveal ? "#303030" : '#b3b3b3'}>{decidedValue}</Text>}
+            {decidedValue === -1 ?
+              <SlPresent size="150" color="#b3b3b3" className={`${isNudgeBox ? styles.nudgeBox : ''} ${isShakeBox ? styles.shakeBox : ''}`}></SlPresent> :
+              <HStack>
+                <Text position="relative" top="1px" fontSize="100px" fontWeight="500" color={reveal ? "#303030" : '#b3b3b3'}>{decidedValue}</Text>
+                <Text position="relative" top="30px" fontSize="24px" fontWeight="500" color="#b3b3b3">({nearestHigherFib})</Text>
+              </HStack>}
 
             {reveal ?
               <Button mt="4" w="40" h="12" bg="#00bbb4" border="3px solid rgb(0, 78, 55)" color="white" onClick={() => handleStartNewGameButtonClick()}>Start new game</Button> : ''
             }
             <Box position="relative" top="-110px" right="-4px">{isExploding && <ConfettiExplosion id="confetti" duration={3000} height={1500} width={1000} />}</Box>
           </Center>
-          
+
         </Box>
         <Box w="full" h="20%">
           <ValueCardList isDisabled={decidedValue !== -1} selectValueFn={selectValue} selectedValue={selectedValue}></ValueCardList>

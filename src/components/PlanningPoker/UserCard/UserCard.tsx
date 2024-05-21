@@ -18,7 +18,7 @@ const UserCard: FC<UserCardProps> = (props: UserCardProps) => (
     <HStack h="100%" w="full" pl="4" justifyContent="space-between">
       <Flex flexDirection="row">
         <Tooltip label={props.name} isDisabled={props.name.length < 30}>
-          <Text fontWeight="700" fontSize="20px" maxWidth="300px" noOfLines={1}>{props.name}</Text>
+          <Text fontWeight="700" fontSize="20px" maxWidth="250px" wordBreak={'break-all'} noOfLines={1}>{props.name}</Text>
         </Tooltip>
 
         {props.selfId === props.userId ?
