@@ -18,7 +18,7 @@ const NamePicker: FC<NamePickerProps> = (props: NamePickerProps) => {
   const [nameValue, setNameValue] = useState<string>("")
   const [roomcodeValue, setRoomcodeValue] = useState<string>("")
 
-  const { data, isLoading } = useQuery('getRooms', async (): Promise<BasicRoomInfo[]> => {
+  const { data } = useQuery('getRooms', async (): Promise<BasicRoomInfo[]> => {
     return await getPokerRooms();
   })
 
