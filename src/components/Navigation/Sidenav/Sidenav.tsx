@@ -31,6 +31,11 @@ const Sidenav: FC<SidenavProps> = () => {
       icon: "RiTestTubeFill",
       label: "Video ID Test Page",
       path: "video-id-test"
+    },
+    {
+      icon: "RiTestTubeFill",
+      label: "Many requests",
+      path: "many-requests"
     }
     // {
     //   icon: "FaUser",

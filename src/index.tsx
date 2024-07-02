@@ -1,26 +1,27 @@
+import { ChakraProvider } from '@chakra-ui/react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import PokerGameRoute from './components/Navigation/Routes/PokerGameRoute/PokerGameRoute';
-import { ChakraProvider } from '@chakra-ui/react';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import AccountInformationRoute from './components/Navigation/Routes/AccountInformationRoute/AccountInformationRoute';
-import ProtectedAdminRoute from './components/Auth/ProtectedAdminRoute/ProtectedAdminRoute';
+import App from './App';
 import Login from './components/Auth/Login/Login';
-import SupportApp from './components/SupportApp/SupportApp';
-import ProtectedLoginRoute from './components/Auth/ProtectedLoginRoute/ProtectedLoginRoute';
-import SupportAppOnboarding from './components/SupportApp/SupportAppOnboarding/SupportAppOnboarding';
+import ProtectedAdminRoute from './components/Auth/ProtectedAdminRoute/ProtectedAdminRoute';
 import ProtectedApprovedRoleRoute from './components/Auth/ProtectedApprovedRoleRoute/ProtectedApprovedRoleRoute';
-import UserManagementRoute from './components/Navigation/Routes/UserManagementRoute/UserManagementRoute';
-import IFrameTestRoute from './components/Navigation/Routes/IFrameTest/IFrameTestRoute';
-import VideoIdTestPageRoute from './components/Navigation/Routes/VideoIdTestPageRoute/VideoIdTestPageRoute';
-import UnprotectedIframe from './components/Iframes/unprotected-iframe/unprotected-iframe';
+import ProtectedLoginRoute from './components/Auth/ProtectedLoginRoute/ProtectedLoginRoute';
 import BlankRoute from './components/Iframes/blank-route/blank-route';
+import UnprotectedIframe from './components/Iframes/unprotected-iframe/unprotected-iframe';
+import ManyRequestRoute from './components/ManyRequestRoute/ManyRequestRoute';
+import AccountInformationRoute from './components/Navigation/Routes/AccountInformationRoute/AccountInformationRoute';
+import IFrameTestRoute from './components/Navigation/Routes/IFrameTest/IFrameTestRoute';
+import PokerGameRoute from './components/Navigation/Routes/PokerGameRoute/PokerGameRoute';
+import UserManagementRoute from './components/Navigation/Routes/UserManagementRoute/UserManagementRoute';
+import VideoIdTestPageRoute from './components/Navigation/Routes/VideoIdTestPageRoute/VideoIdTestPageRoute';
+import SupportApp from './components/SupportApp/SupportApp';
+import SupportAppOnboarding from './components/SupportApp/SupportAppOnboarding/SupportAppOnboarding';
+import './index.css';
 
 const queryClient = new QueryClient()
 
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
               {
                 path: 'video-id-test',
                 element: <VideoIdTestPageRoute />
+              },
+              {
+                path: 'many-requests',
+                element: <ManyRequestRoute />
               },
               {
                 path: 'admin',
